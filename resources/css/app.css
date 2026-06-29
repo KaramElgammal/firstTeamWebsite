@@ -77,6 +77,21 @@
 }
 
 :root {
+    /* Page-level brand variables — Light Mode */
+    --page-bg: #fdf6f0;
+    --page-bg-secondary: #ffffff;
+    --page-text: #1a1010;
+    --page-text-muted: #6b4f4b;
+    --page-accent: #c0524a;
+    --page-border: rgba(192, 82, 74, 0.25);
+    --page-btn-bg: #b03030;
+    --page-btn-hover: #8b1414;
+    --page-header-bg: rgba(253, 246, 240, 0.92);
+    --page-card-bg: #ffffff;
+    --page-inner-box: #fdf0eb;
+    --page-selection-bg: #f3b8b1;
+    --page-selection-text: #1a1010;
+
     --background: hsl(0, 0%, 100%);
     --foreground: hsl(0, 0%, 3.9%);
     --card: hsl(0, 0%, 100%);
@@ -113,6 +128,21 @@
 }
 
 .dark {
+    /* Page-level brand variables — Dark Mode */
+    --page-bg: #171110;
+    --page-bg-secondary: #251c1a;
+    --page-text: #ffffff;
+    --page-text-muted: #a39997;
+    --page-accent: #f3b8b1;
+    --page-border: rgba(243, 184, 177, 0.2);
+    --page-btn-bg: #6b0f0f;
+    --page-btn-hover: #8b1414;
+    --page-header-bg: rgba(17, 12, 11, 0.9);
+    --page-card-bg: #251c1a;
+    --page-inner-box: #171110;
+    --page-selection-bg: #f3b8b1;
+    --page-selection-text: #171110;
+
     --background: hsl(0, 0%, 3.9%);
     --foreground: hsl(0, 0%, 98%);
     --card: hsl(0, 0%, 3.9%);
