@@ -69,6 +69,7 @@ export default function DeleteUser() {
                                     onChange={(e) => setData('password', e.target.value)}
                                     placeholder="Password"
                                     autoComplete="current-password"
+                                    className="text-foreground"
                                 />
 
                                 <InputError message={errors.password} />

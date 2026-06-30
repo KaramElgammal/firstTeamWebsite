@@ -32,7 +32,7 @@ export default function Dashboard() {
 
             {/* Header */}
             <header
-                className="sticky top-0 z-50 backdrop-blur-md border-b"
+                className="sticky top-0  z-50 backdrop-blur-md border-b"
                 style={{ backgroundColor: 'var(--page-header-bg)', borderColor: 'var(--page-border)' }}
             >
                 <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
@@ -40,17 +40,17 @@ export default function Dashboard() {
                         <img 
                             src="/logo.png" 
                             alt="First Team Logo" 
-                            className="w-10 h-10 object-contain drop-shadow-lg"
+                            className="w-10 object-contain drop-shadow-lg rounded-full"
                             onError={(e) => { e.currentTarget.src = 'https://placehold.co/40x40/000000/FFFFFF?text=FT'; }}
                         />
                         <span className="text-xl font-bold tracking-widest" style={{ color: 'var(--page-text)' }}>FT</span>
                     </div>
 
-                    <nav className="hidden md:flex items-center gap-8 text-sm font-medium" style={{ color: 'var(--page-text-muted)' }}>
+                    <nav className="hidden font-bold md:flex items-center gap-8 text-sm font-medium" style={{ color: 'var(--page-text-muted)' }}>
                         <a href="#home" className="transition-colors border-b-2 pb-1" style={{ color: 'var(--page-text)', borderColor: 'var(--page-accent)' }}>{t('nav.home') || 'Home'}</a>
                         <a href="#services" className="transition-colors hover:text-[var(--page-accent)]">{t('nav.services') || 'Services'}</a>
                         <a href="#about" className="transition-colors hover:text-[var(--page-accent)]">{t('nav.about') || 'About'}</a>
-                        <a href="#contact" className="transition-colors hover:text-[var(--page-accent)]">{t('nav.contact') || 'Contact'}</a>
+                        <Link href={route('contact')} className="transition-colors hover:text-[var(--page-accent)]">{t('nav.contact') || 'Contact'}</Link>
                     </nav>
 
                     <div className="flex items-center gap-3">
@@ -108,7 +108,7 @@ export default function Dashboard() {
                     <img 
                         src="/logo.png" 
                         alt="First Team Icon" 
-                        className="w-20 h-20 object-contain mx-auto"
+                        className="w-40 object-contain mx-auto rounded-full"
                         onError={(e) => { e.currentTarget.src = 'https://placehold.co/80x80/000000/FFFFFF?text=FT'; }}
                     />
                 </div>
@@ -121,14 +121,7 @@ export default function Dashboard() {
                     {t('hero.desc') || 'High-performance solutions for elite organizations. We design, develop, and engineer with tactical precision to drive your team toward absolute dominance.'}
                 </p>
                 
-                <div className="flex flex-col sm:flex-row gap-4 z-10">
-                    <a href="#services" className="font-bold px-8 py-3 rounded tracking-widest transition-all" style={{ backgroundColor: 'var(--page-accent)', color: 'var(--page-bg)' }}>
-                        {t('hero.btn_learn') || 'LEARN MORE'}
-                    </a>
-                    <a href="#portfolio" className="font-bold px-8 py-3 rounded tracking-widest transition-all border" style={{ backgroundColor: 'transparent', borderColor: 'var(--page-border)', color: 'var(--page-text)' }}>
-                        {t('hero.btn_portfolio') || 'VIEW PORTFOLIO'}
-                    </a>
-                </div>
+                
             </section>
 
             {/* Core Services Section */}
@@ -137,7 +130,6 @@ export default function Dashboard() {
                     <p className="text-xs font-bold tracking-[0.2em] uppercase mb-2" style={{ color: 'var(--page-accent)' }}>{t('services.subtitle') || 'Operational Capabilities'}</p>
                     <h2 className="text-4xl font-bold" style={{ color: 'var(--page-text)' }}>{t('services.title') || 'Core Services'}</h2>
                 </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {[
                         { icon: <CodeXml style={{ color: 'var(--page-accent)' }} />, titleKey: 'services.sw_title', descKey: 'services.sw_desc', titleFb: 'Software Development', descFb: 'Hard-coded excellence using modern tech stacks. Scalable architectures built for mission-critical reliability.' },

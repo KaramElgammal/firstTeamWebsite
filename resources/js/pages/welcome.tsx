@@ -9,9 +9,7 @@ export default function Welcome() {
     const { t, locale } = useTranslation();
 
     return (
-        <>
-            <Head title="Welcome to First Team" />
-            
+        <>  
             <div
                 className="relative min-h-screen font-sans"
                 style={{
@@ -69,7 +67,7 @@ export default function Welcome() {
                 </header>
 
                 {/* Main Content Area */}
-                <main className="flex flex-col items-center justify-center min-h-screen p-6">
+                <main className="flex flex-col items-center justify-center min-h-screen p-20">
                     <div
                         className="w-full max-w-3xl rounded-2xl shadow-2xl overflow-hidden border transform transition-all hover:scale-[1.01] duration-500"
                         style={{
@@ -81,7 +79,7 @@ export default function Welcome() {
                             
                             {/* Logo */}
                             <div
-                                className="mb-8 p-4 rounded-xl shadow-inner border"
+                                className="mb-8 p-4 rounded-4xl shadow-inner border"
                                 style={{
                                     backgroundColor: 'var(--page-inner-box)',
                                     borderColor: 'var(--page-border)',
@@ -90,7 +88,7 @@ export default function Welcome() {
                                 <img 
                                     src="/logo.png" 
                                     alt="First Team Logo" 
-                                    className="w-48 h-auto object-contain md:w-64 drop-shadow-2xl"
+                                    className="w-48 h-auto rounded-4xl object-contain md:w-64 drop-shadow-2xl"
                                     onError={(e) => {
                                         e.currentTarget.src = 'https://placehold.co/400x200/000000/FFFFFF?text=First+Team+Logo';
                                     }}
@@ -115,7 +113,7 @@ export default function Welcome() {
                                             }}
                                         >
                                             <p className="flex items-start gap-3 text-right" style={{ color: 'var(--page-accent)' }}>
-                                                <span className="text-2xl">📌</span>
+                                                
                                                 <span>
                                                     مستمرون في دعمكم، ومواصلة تقديم المساعدة في المشاريع، وتنمية المهارات البرمجية والتقنية والتصميمية.
                                                 </span>
@@ -141,7 +139,7 @@ export default function Welcome() {
                                             }}
                                         >
                                             <p className="flex items-start gap-3 text-left" style={{ color: 'var(--page-accent)' }}>
-                                                <span className="text-2xl">📌</span>
+                                                
                                                 <span>
                                                     We remain committed to supporting you, assisting with projects, and fostering the growth of programming, technical, and design skills.
                                                 </span>

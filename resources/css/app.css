@@ -186,3 +186,11 @@
         @apply bg-background text-foreground;
     }
 }
+
+/* Fix dropdown menu item hover/focus visibility in light & dark mode */
+[data-radix-popper-content-wrapper] [role="menuitem"]:focus,
+[data-radix-popper-content-wrapper] [role="menuitem"][data-highlighted] {
+    background-color: color-mix(in srgb, var(--page-accent) 12%, transparent);
+    color: var(--page-text);
+    outline: none;
+}

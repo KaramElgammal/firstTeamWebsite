@@ -12,10 +12,13 @@ export default function LanguageSwitcher({ className = '' }: { className?: strin
     return (
         <button 
             onClick={toggleLanguage} 
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-full border border-[#f3b8b1]/30 hover:bg-[#f3b8b1]/10 text-white transition-all text-sm font-semibold shadow-sm ${className}`}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-full border transition-all text-sm font-semibold shadow-sm ${className}`}
+            style={{ borderColor: 'var(--page-border)', color: 'var(--page-text)', backgroundColor: 'transparent' }}
+            onMouseEnter={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'color-mix(in srgb, var(--page-accent) 10%, transparent)'; }}
+            onMouseLeave={e => { (e.currentTarget as HTMLElement).style.backgroundColor = 'transparent'; }}
             title="Switch Language"
         >
-            <Globe className="w-4 h-4 text-[#f3b8b1]" />
+            <Globe className="w-4 h-4" style={{ color: 'var(--page-accent)' }} />
             <span>{locale === 'ar' ? 'EN' : 'عربي'}</span>
         </button>
     );
