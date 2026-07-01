@@ -35,7 +35,7 @@ export default function AuthSimpleLayout({ children, title, description }: AuthL
                     <div className="flex flex-col items-center gap-4">
                         <Link href={route('home')} className="flex flex-col items-center gap-2 font-medium transition-transform hover:scale-105">
                             <div
-                                className="mb-2 flex items-center justify-center rounded-md p-3 shadow-inner border"
+                                className="mb-2 flex items-center justify-center rounded-4xl p-3 shadow-inner border"
                                 style={{
                                     backgroundColor: 'var(--page-inner-box)',
                                     borderColor: 'var(--page-border)',
@@ -44,7 +44,7 @@ export default function AuthSimpleLayout({ children, title, description }: AuthL
                                 <img 
                                     src="/logo.png" 
                                     alt="First Team Logo" 
-                                    className="w-32 h-auto drop-shadow-xl"
+                                    className="w-32 h-auto drop-shadow-xl rounded-4xl"
                                     onError={(e) => {
                                         e.currentTarget.src = 'https://placehold.co/200x100/000000/FFFFFF?text=First+Team';
                                     }}
