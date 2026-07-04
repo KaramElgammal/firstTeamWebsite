@@ -1,2 +1,46 @@
+# =============================================
+# First Team — robots.txt
+# https://firstteam.tech
+# =============================================
+
+# Allow all search engines
 User-agent: *
-Disallow:
+
+# Public pages — allowed (default)
+Allow: /
+Allow: /projects
+Allow: /news
+Allow: /contact
+
+# Block private / authenticated areas
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /settings
+Disallow: /service-request
+Disallow: /3d-request
+Disallow: /robotics-request
+Disallow: /services
+
+# Block authentication routes
+Disallow: /login
+Disallow: /register
+Disallow: /otp
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /verify-email
+Disallow: /confirm-password
+
+# Block language switch endpoint (duplicate content prevention)
+Disallow: /lang/
+
+# Block Laravel internal paths
+Disallow: /storage/
+Disallow: /build/
+Disallow: /_debugbar/
+Disallow: /sanctum/
+
+# Crawl-delay (be kind to small servers)
+Crawl-delay: 2
+
+# Sitemap location
+Sitemap: http://localhost:8000/sitemap.xml

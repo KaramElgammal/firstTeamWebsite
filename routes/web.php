@@ -44,10 +44,38 @@ Route::post('/contact', [ContactController::class, 'send'])->name('contact.send'
 
 Route::get('/sitemap.xml', function () {
     $urls = [
-        ['loc' => route('home'), 'priority' => '1.0'],
-        ['loc' => route('projects'), 'priority' => '0.8'],
-        ['loc' => route('news'), 'priority' => '0.8'],
-        ['loc' => route('contact'), 'priority' => '0.6'],
+        // Homepage — highest priority
+        [
+            'loc' => route('home'),
+            'lastmod' => now()->toDateString(),
+            'changefreq' => 'weekly',
+            'priority' => '1.0',
+        ],
+        // Projects page
+        [
+            'loc' => route('projects'),
+            'lastmod' => Project::max('updated_at')
+                ? \Carbon\Carbon::parse(Project::max('updated_at'))->toDateString()
+                : now()->toDateString(),
+            'changefreq' => 'weekly',
+            'priority' => '0.9',
+        ],
+        // News page
+        [
+            'loc' => route('news'),
+            'lastmod' => NewsItem::max('updated_at')
+                ? \Carbon\Carbon::parse(NewsItem::max('updated_at'))->toDateString()
+                : now()->toDateString(),
+            'changefreq' => 'daily',
+            'priority' => '0.9',
+        ],
+        // Contact page
+        [
+            'loc' => route('contact'),
+            'lastmod' => now()->toDateString(),
+            'changefreq' => 'monthly',
+            'priority' => '0.7',
+        ],
     ];
 
     $xml = view('sitemap', ['urls' => $urls])->render();
