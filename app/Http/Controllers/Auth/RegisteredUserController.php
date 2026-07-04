@@ -49,6 +49,8 @@ class RegisteredUserController extends Controller
 
         Mail::to($user->email)->send(new OtpMail($otpCode));
 
+        $user->assignRole('user');
+
         // Redirect to OTP verification page and pass email in query string
         return redirect()->route('otp.verify.form', ['email' => $user->email]);
     }

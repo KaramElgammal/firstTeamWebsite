@@ -4,12 +4,8 @@ import LanguageSwitcher from '@/Components/LanguageSwitcher';
 import ThemeToggle from '@/components/theme-toggle';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useState, useRef, FormEventHandler } from 'react';
-import {
-    DropdownMenu, DropdownMenuContent, DropdownMenuItem,
-    DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { User, LogOut, Menu, X, Send, CheckCircle, UploadCloud, FileCheck2 } from 'lucide-react';
+import SiteUserAvatarMenu from '@/components/site-user-avatar-menu';
+import { Menu, X, Send, CheckCircle, UploadCloud, FileCheck2 } from 'lucide-react';
 
 interface Props {
     service: '3d' | 'robotics';
@@ -44,9 +40,6 @@ function ServiceFormPage({ service, routeName }: Props) {
         post(route(routeName), { forceFormData: true, onSuccess: () => { reset(); setRequestType(''); } });
     };
 
-    const getInitials = (name: string) =>
-        name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
-
     const inputStyle = (hasError: boolean) => ({
         backgroundColor: 'var(--page-bg-secondary)',
         borderColor: hasError ? '#ef4444' : 'var(--page-border)',
@@ -80,34 +73,7 @@ function ServiceFormPage({ service, routeName }: Props) {
                         <button className="md:hidden p-2 rounded-md" style={{ color: 'var(--page-text)' }} onClick={() => setMobileMenuOpen(p => !p)} aria-label="Toggle menu">
                             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                         </button>
-                        <DropdownMenu>
-                            <DropdownMenuTrigger className="focus:outline-none">
-                                <Avatar className="h-10 w-10 border-2 cursor-pointer" style={{ borderColor: 'var(--page-border)', backgroundColor: 'var(--page-bg-secondary)' }}>
-                                    <AvatarImage src={`https://api.dicebear.com/7.x/initials/svg?seed=${user.name}&backgroundColor=6b0f0f&textColor=f3b8b1`} alt={user.name} />
-                                    <AvatarFallback className="font-bold" style={{ backgroundColor: 'var(--page-btn-bg)', color: 'var(--page-accent)' }}>{getInitials(user.name)}</AvatarFallback>
-                                </Avatar>
-                            </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="w-56 shadow-2xl border" style={{ backgroundColor: 'var(--page-bg-secondary)', borderColor: 'var(--page-border)', color: 'var(--page-text)' }}>
-                                <DropdownMenuLabel className="font-normal">
-                                    <p className="text-sm font-medium" style={{ color: 'var(--page-text)' }}>{user.name}</p>
-                                    <p className="text-xs" style={{ color: 'var(--page-text-muted)' }}>{user.email}</p>
-                                </DropdownMenuLabel>
-                                <DropdownMenuSeparator style={{ backgroundColor: 'var(--page-border)' }} />
-                                <DropdownMenuItem asChild className="cursor-pointer">
-                                    <Link href={route('profile.edit')} className="flex items-center w-full">
-                                        <User className="rtl:ml-2 ltr:mr-2 h-4 w-4" style={{ color: 'var(--page-accent)' }} />
-                                        <span>{t('nav.my_profile')}</span>
-                                    </Link>
-                                </DropdownMenuItem>
-                                <DropdownMenuSeparator style={{ backgroundColor: 'var(--page-border)' }} />
-                                <DropdownMenuItem asChild className="text-red-500 cursor-pointer">
-                                    <Link href={route('logout')} method="post" as="button" className="flex items-center w-full">
-                                        <LogOut className="rtl:ml-2 ltr:mr-2 h-4 w-4" />
-                                        <span>{t('nav.log_out')}</span>
-                                    </Link>
-                                </DropdownMenuItem>
-                            </DropdownMenuContent>
-                        </DropdownMenu>
+                        <SiteUserAvatarMenu user={user} isAdmin={auth.isAdmin} />
                     </div>
                 </div>
             </header>
