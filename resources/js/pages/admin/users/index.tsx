@@ -23,6 +23,7 @@ interface UserRow {
     name: string;
     email: string;
     is_admin: boolean;
+    is_protected: boolean;
     email_verified_at: string | null;
     created_at: string;
 }
@@ -131,12 +132,19 @@ export default function AdminUsersIndex({ users }: Props) {
                                             </td>
                                             <td className="p-4">
                                                 <div className="flex items-center justify-end gap-2">
-                                                    <Button variant="ghost" size="icon" onClick={() => openEdit(u)}>
-                                                        <Pencil className="h-4 w-4" />
-                                                    </Button>
-                                                    <Button variant="ghost" size="icon" onClick={() => setDeletingUser(u)}>
-                                                        <Trash2 className="h-4 w-4 text-red-500" />
-                                                    </Button>
+                                                    {!u.is_protected && (
+                                                        <>
+                                                            <Button variant="ghost" size="icon" onClick={() => openEdit(u)}>
+                                                                <Pencil className="h-4 w-4" />
+                                                            </Button>
+                                                            <Button variant="ghost" size="icon" onClick={() => setDeletingUser(u)}>
+                                                                <Trash2 className="h-4 w-4 text-red-500" />
+                                                            </Button>
+                                                        </>
+                                                    )}
+                                                    {u.is_protected && (
+                                                        <span className="text-xs px-2 py-1 rounded-full bg-amber-500/15 text-amber-500 font-medium">🔒 {t('admin.protected') || 'Protected'}</span>
+                                                    )}
                                                 </div>
                                             </td>
                                         </tr>

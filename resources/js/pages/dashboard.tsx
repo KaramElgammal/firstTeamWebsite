@@ -168,7 +168,7 @@ export default function Dashboard() {
                             <img 
                                 src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=1000&auto=format&fit=crop" 
                                 alt="Command Center" 
-                                className="w-full h-full object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700"
+                                className="w-full h-full object-cover opacity-80 hover:grayscale-0 transition-all duration-700"
                             />
                         </div>
                     </div>
@@ -196,7 +196,7 @@ export default function Dashboard() {
                         <img 
                             src="/logo.png" 
                             alt="First Team Logo" 
-                            className="w-6 h-6 object-contain grayscale opacity-70"
+                            className="w-6 h-6 object-contain"
                             onError={(e) => { e.currentTarget.src = 'https://placehold.co/24x24/000000/FFFFFF?text=FT'; }}
                         />
                         <span className="text-lg font-bold tracking-[0.2em] uppercase" style={{ color: 'var(--page-text-muted)' }}>First Team</span>

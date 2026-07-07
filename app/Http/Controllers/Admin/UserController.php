@@ -23,6 +23,7 @@ class UserController extends Controller
                 'name' => $user->name,
                 'email' => $user->email,
                 'is_admin' => $user->hasRole('admin'),
+                'is_protected' => $user->isSuperAdmin(),
                 'email_verified_at' => $user->email_verified_at,
                 'created_at' => $user->created_at,
             ]);
@@ -55,6 +56,11 @@ class UserController extends Controller
 
     public function update(Request $request, User $user): RedirectResponse
     {
+        // Super-admin account cannot be modified.
+        if ($user->isSuperAdmin()) {
+            return back()->with('error', 'This account is protected and cannot be modified.');
+        }
+
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', Rule::unique('users', 'email')->ignore($user->id)],
@@ -78,6 +84,11 @@ class UserController extends Controller
 
     public function destroy(Request $request, User $user): RedirectResponse
     {
+        // Super-admin account can never be deleted.
+        if ($user->isSuperAdmin()) {
+            return back()->with('error', 'This account is protected and cannot be deleted.');
+        }
+
         if ($user->id === $request->user()->id) {
             return back()->with('error', 'You cannot delete your own account.');
         }

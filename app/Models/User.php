@@ -14,6 +14,31 @@ class User extends Authenticatable
     use HasFactory, Notifiable, HasRoles;
 
     /**
+     * The super-admin email that can never be deleted or demoted.
+     */
+    public const SUPER_ADMIN_EMAIL = 'firstteamrobots@gmail.com';
+
+    /**
+     * Determine whether this user is the protected super-admin.
+     */
+    public function isSuperAdmin(): bool
+    {
+        return mb_strtolower($this->email) === self::SUPER_ADMIN_EMAIL;
+    }
+
+    /**
+     * Prevent deletion of the super-admin account.
+     */
+    public function delete(): ?bool
+    {
+        if ($this->isSuperAdmin()) {
+            return false;
+        }
+
+        return parent::delete();
+    }
+
+    /**
      * The attributes that are mass assignable.
      *
      * @var list<string>

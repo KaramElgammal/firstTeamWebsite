@@ -252,16 +252,12 @@ export default function Services({ services }: Props) {
                         <img
                             src="/logo.png"
                             alt="First Team Logo"
-                            className="w-6 h-6 object-contain grayscale opacity-70"
+                            className="w-6 h-6 object-contain"
                             onError={(e) => { e.currentTarget.src = 'https://placehold.co/24x24/000000/FFFFFF?text=FT'; }}
                         />
                         <span className="text-lg font-bold tracking-[0.2em] uppercase" style={{ color: 'var(--page-text-muted)' }}>First Team</span>
                     </div>
-                    <div className="flex flex-wrap justify-center gap-4 sm:gap-6 text-xs font-bold tracking-widest uppercase" style={{ color: 'var(--page-text-muted)' }}>
-                        <a href="#" className="transition-colors hover:text-[var(--page-text)]">{t('footer.privacy_policy')}</a>
-                        <a href="#" className="transition-colors hover:text-[var(--page-text)]">{t('footer.terms_service')}</a>
-                        <Link href={route('contact')} className="transition-colors hover:text-[var(--page-text)]">{t('footer.contact')}</Link>
-                    </div>
+                    
                     {/* Social Links */}
                     <div className="flex flex-wrap justify-center gap-4 sm:gap-6">
                         <a href="https://www.youtube.com/@firstteam7713" target="_blank" rel="noopener noreferrer"
