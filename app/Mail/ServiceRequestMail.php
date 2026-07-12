@@ -19,9 +19,8 @@ class ServiceRequestMail extends Mailable
     public string  $serviceName;
     public string  $requestType;   // 'ready' | 'designer'
     public string  $details;
-    public ?string $filePath;
-    public ?string $fileName;
     public ?string $imageNote;
+    public array $attachmentsList;
 
     public function __construct(
         string  $senderName,
@@ -30,9 +29,8 @@ class ServiceRequestMail extends Mailable
         string  $serviceName,
         string  $requestType,
         string  $details,
-        ?string $filePath  = null,
-        ?string $fileName  = null,
-        ?string $imageNote = null
+        ?string $imageNote = null,
+        array $attachmentsList = []
     ) {
         $this->senderName  = $senderName;
         $this->senderEmail = $senderEmail;
@@ -40,9 +38,8 @@ class ServiceRequestMail extends Mailable
         $this->serviceName = $serviceName;
         $this->requestType = $requestType;
         $this->details     = $details;
-        $this->filePath    = $filePath;
-        $this->fileName    = $fileName;
         $this->imageNote   = $imageNote;
+        $this->attachmentsList = $attachmentsList;
     }
 
     public function envelope(): Envelope
@@ -62,12 +59,13 @@ class ServiceRequestMail extends Mailable
 
     public function attachments(): array
     {
-        if ($this->filePath && file_exists($this->filePath)) {
-            return [
-                Attachment::fromPath($this->filePath)
-                    ->as($this->fileName ?? basename($this->filePath)),
-            ];
+        $mailAttachments = [];
+        foreach ($this->attachmentsList as $file) {
+            if (isset($file['path']) && file_exists($file['path'])) {
+                $mailAttachments[] = Attachment::fromPath($file['path'])
+                    ->as($file['name'] ?? basename($file['path']));
+            }
         }
-        return [];
+        return $mailAttachments;
     }
 }

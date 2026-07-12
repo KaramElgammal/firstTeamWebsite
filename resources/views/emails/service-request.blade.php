@@ -75,11 +75,11 @@
                 </div>
             @endif
 
-            @if($fileName)
+            @if(!empty($attachmentsList))
                 <div class="row">
-                    <div class="label">Attached File</div>
+                    <div class="label">Attached File(s)</div>
                     <div class="attachment-note">
-                        📎 {{ $fileName }} — see attachment
+                        📎 {{ count($attachmentsList) }} file(s) attached — see attachments
                     </div>
                 </div>
             @endif

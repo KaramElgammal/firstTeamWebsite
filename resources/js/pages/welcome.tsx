@@ -64,9 +64,13 @@ export default function Welcome() {
                                 </button>
                                 {menuOpen && (
                                     <div
-                                        className="absolute top-10 left-0 rounded-xl shadow-2xl border py-2 min-w-[160px] z-30"
+                                        className="absolute top-10 left-0 rounded-xl shadow-2xl border py-2 min-w-[160px] z-30 flex flex-col"
                                         style={{ backgroundColor: 'var(--page-bg-secondary)', borderColor: 'var(--page-border)' }}
                                     >
+                                        <div className="flex items-center justify-center gap-4 px-4 py-3 border-b mb-1" style={{ borderColor: 'var(--page-border)' }}>
+                                            <ThemeToggle />
+                                            <LanguageSwitcher />
+                                        </div>
                                         <Link
                                             href={route('projects')}
                                             onClick={() => setMenuOpen(false)}
@@ -94,8 +98,10 @@ export default function Welcome() {
 
                         {/* Right side */}
                         <div className="flex items-center gap-2 sm:gap-3">
-                            <ThemeToggle />
-                            <LanguageSwitcher />
+                            <div className="hidden sm:flex items-center gap-2 sm:gap-3">
+                                <ThemeToggle />
+                                <LanguageSwitcher />
+                            </div>
                             {auth.user ? (
                                 <>
                                     <Link

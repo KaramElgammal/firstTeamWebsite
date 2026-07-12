@@ -27,12 +27,12 @@ function ServiceFormPage({ service, routeName }: Props) {
 
     const { data, setData, post, processing, errors, reset, recentlySuccessful } = useForm<{
         name: string; email: string; phone: string; service: string;
-        request_type: string; details: string; file: File | null; image: File | null; image_note: string;
+        request_type: string; details: string; files: File[]; images: File[]; image_note: string;
     }>({
         name: '', email: '', phone: '',
         service: serviceName,
         request_type: '',
-        details: '', file: null, image: null, image_note: '',
+        details: '', files: [], images: [], image_note: '',
     });
 
     const submit: FormEventHandler = (e) => {
@@ -174,15 +174,28 @@ function ServiceFormPage({ service, routeName }: Props) {
                                 onClick={() => fileInputRef.current?.click()}
                                 onDragOver={e => { e.preventDefault(); setDragOver(true); }}
                                 onDragLeave={() => setDragOver(false)}
-                                onDrop={e => { e.preventDefault(); setDragOver(false); const f = e.dataTransfer.files[0]; if (f) setData('file', f); }}
+                                onDrop={e => { e.preventDefault(); setDragOver(false); if (e.dataTransfer.files.length) setData('files', [...data.files, ...Array.from(e.dataTransfer.files)]); }}
                             >
-                                <input ref={fileInputRef} type="file" accept="*/*" className="hidden" onChange={e => { if (e.target.files?.[0]) setData('file', e.target.files[0]); }} />
-                                {data.file ? (
-                                    <div className="flex flex-col items-center gap-2">
-                                        <FileCheck2 className="h-10 w-10" style={{ color: 'var(--page-accent)' }} />
-                                        <p className="text-sm font-bold" style={{ color: 'var(--page-text)' }}>{data.file.name}</p>
-                                        <p className="text-xs" style={{ color: 'var(--page-text-muted)' }}>{(data.file.size / 1024 / 1024).toFixed(2)} MB</p>
-                                        <button type="button" onClick={e => { e.stopPropagation(); setData('file', null); }} className="text-xs underline mt-1" style={{ color: 'var(--page-text-muted)' }}>Remove</button>
+                                <input ref={fileInputRef} type="file" multiple accept="*/*" className="hidden" onChange={e => { if (e.target.files?.length) setData('files', [...data.files, ...Array.from(e.target.files)]); e.target.value = ''; }} />
+                                {data.files.length > 0 ? (
+                                    <div className="flex flex-col items-center gap-4 w-full">
+                                        <div className="flex flex-col items-center w-full gap-2">
+                                            {data.files.map((f, idx) => (
+                                                <div key={idx} className="flex items-center justify-between w-full max-w-sm p-3 rounded-lg border" style={{ backgroundColor: 'var(--page-bg)', borderColor: 'var(--page-border)' }}>
+                                                    <div className="flex items-center gap-3 overflow-hidden">
+                                                        <FileCheck2 className="h-6 w-6 flex-shrink-0" style={{ color: 'var(--page-accent)' }} />
+                                                        <div className="flex flex-col text-left overflow-hidden">
+                                                            <p className="text-sm font-bold truncate" style={{ color: 'var(--page-text)' }}>{f.name}</p>
+                                                            <p className="text-xs" style={{ color: 'var(--page-text-muted)' }}>{(f.size / 1024 / 1024).toFixed(2)} MB</p>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" onClick={e => { e.stopPropagation(); setData('files', data.files.filter((_, i) => i !== idx)); }} className="p-2 text-red-500 hover:bg-red-50 rounded-md transition-colors">
+                                                        <X className="h-4 w-4" />
+                                                    </button>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <button type="button" onClick={e => { e.stopPropagation(); fileInputRef.current?.click(); }} className="text-xs underline mt-2" style={{ color: 'var(--page-accent)' }}>Add more files</button>
                                     </div>
                                 ) : (
                                     <div className="flex flex-col items-center gap-3">
@@ -192,7 +205,7 @@ function ServiceFormPage({ service, routeName }: Props) {
                                     </div>
                                 )}
                             </div>
-                            {errors.file && <p className="text-xs text-red-500">{errors.file}</p>}
+                            {errors.files && <p className="text-xs text-red-500">{errors.files}</p>}
                         </div>
                     )}
 
@@ -206,14 +219,22 @@ function ServiceFormPage({ service, routeName }: Props) {
                                     style={{ borderColor: 'var(--page-border)', backgroundColor: 'var(--page-bg-secondary)' }}
                                     onClick={() => imageInputRef.current?.click()}
                                     onDragOver={e => { e.preventDefault(); }}
-                                    onDrop={e => { e.preventDefault(); const f = e.dataTransfer.files[0]; if (f) setData('image', f); }}
+                                    onDrop={e => { e.preventDefault(); if (e.dataTransfer.files.length) setData('images', [...data.images, ...Array.from(e.dataTransfer.files)]); }}
                                 >
-                                    <input ref={imageInputRef} type="file" accept="image/*" className="hidden" onChange={e => { if (e.target.files?.[0]) setData('image', e.target.files[0]); }} />
-                                    {data.image ? (
-                                        <div className="flex flex-col items-center gap-2">
-                                            <img src={URL.createObjectURL(data.image)} alt="preview" className="max-h-48 mx-auto rounded-lg object-contain" />
-                                            <p className="text-xs mt-2" style={{ color: 'var(--page-text-muted)' }}>{data.image.name}</p>
-                                            <button type="button" onClick={e => { e.stopPropagation(); setData('image', null); }} className="text-xs underline" style={{ color: 'var(--page-text-muted)' }}>Remove</button>
+                                    <input ref={imageInputRef} type="file" multiple accept="image/*" className="hidden" onChange={e => { if (e.target.files?.length) setData('images', [...data.images, ...Array.from(e.target.files)]); e.target.value = ''; }} />
+                                    {data.images.length > 0 ? (
+                                        <div className="flex flex-col items-center gap-4 w-full">
+                                            <div className="flex flex-wrap items-center justify-center gap-3">
+                                                {data.images.map((img, idx) => (
+                                                    <div key={idx} className="relative group">
+                                                        <img src={URL.createObjectURL(img)} alt="preview" className="h-20 w-20 object-cover rounded-lg border shadow-sm" style={{ borderColor: 'var(--page-border)' }} />
+                                                        <button type="button" onClick={e => { e.stopPropagation(); setData('images', data.images.filter((_, i) => i !== idx)); }} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                            <X className="h-3 w-3" />
+                                                        </button>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                            <button type="button" onClick={e => { e.stopPropagation(); imageInputRef.current?.click(); }} className="text-xs underline mt-2" style={{ color: 'var(--page-accent)' }}>{t('sreq.image_hint') || 'Add more images'}</button>
                                         </div>
                                     ) : (
                                         <div className="flex flex-col items-center gap-3">
@@ -255,7 +276,7 @@ function ServiceFormPage({ service, routeName }: Props) {
             <footer className="border-t py-10 px-4 sm:px-6" style={{ borderColor: 'var(--page-border)', backgroundColor: 'var(--page-inner-box)' }}>
                 <div className="max-w-7xl mx-auto flex flex-col items-center gap-5">
                     <div className="flex items-center gap-3">
-                        <img src="/logo.png" className="w-6 h-6 object-contain grayscale opacity-70" onError={(e) => { e.currentTarget.src = 'https://placehold.co/24x24/000000/FFFFFF?text=FT'; }} alt="logo" />
+                        <img src="/logo.png" className="w-6 h-6 object-contain " onError={(e) => { e.currentTarget.src = 'https://placehold.co/24x24/000000/FFFFFF?text=FT'; }} alt="logo" />
                         <span className="text-lg font-bold tracking-[0.2em] uppercase" style={{ color: 'var(--page-text-muted)' }}>First Team</span>
                     </div>
                     <div className="text-[10px] tracking-widest uppercase" style={{ color: 'var(--page-text-muted)', opacity: 0.5 }}>
