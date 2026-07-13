@@ -1,7 +1,7 @@
 import { Head, useForm, usePage } from '@inertiajs/react';
 import { FormEventHandler } from 'react';
 import ThemeToggle from '@/components/theme-toggle';
-import LanguageSwitcher from '@/Components/LanguageSwitcher';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import { useTranslation } from '@/hooks/useTranslation';
 import { Send, Mail, MessageSquare, ArrowLeft } from 'lucide-react';
 import { Link } from '@inertiajs/react';
