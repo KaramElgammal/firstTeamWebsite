@@ -1,6 +1,6 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { type SharedData } from '@/types';
-import LanguageSwitcher from '@/Components/LanguageSwitcher';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import ThemeToggle from '@/components/theme-toggle';
 import { useTranslation } from '@/hooks/useTranslation';
 import { useState } from 'react';

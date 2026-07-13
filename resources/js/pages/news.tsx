@@ -1,7 +1,7 @@
 import { Head, Link } from '@inertiajs/react';
 import { usePage } from '@inertiajs/react';
 import { type SharedData } from '@/types';
-import LanguageSwitcher from '@/Components/LanguageSwitcher';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import ThemeToggle from '@/components/theme-toggle';
 import SiteAdminLink from '@/components/site-admin-link';
 import { useTranslation } from '@/hooks/useTranslation';

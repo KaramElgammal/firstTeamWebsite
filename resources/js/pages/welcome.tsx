@@ -1,6 +1,6 @@
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
-import LanguageSwitcher from '@/Components/LanguageSwitcher';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import ThemeToggle from '@/components/theme-toggle';
 import SiteAdminLink from '@/components/site-admin-link';
 import { useTranslation } from '@/hooks/useTranslation';
