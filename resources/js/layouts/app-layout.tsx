@@ -23,10 +23,7 @@ interface AppLayoutProps {
 export default function AppLayout({ children, breadcrumbs }: AppLayoutProps) {
     const { auth } = usePage<SharedData>().props;
     const { t } = useTranslation();
-    const user = auth.user ?? {
-    name: 'Guest',
-    email: '',
-};
+    const user = auth.user;
 
     const getInitials = (name: string) => {
         return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
