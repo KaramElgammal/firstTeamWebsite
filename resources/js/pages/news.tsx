@@ -136,8 +136,12 @@ export default function News({ newsItems }: Props) {
                                     </svg>
                                 </button>
                                 {menuOpen && (
-                                    <div className="absolute top-10 left-0 rounded-xl shadow-2xl border py-2 min-w-[160px] z-30"
+                                    <div className="absolute top-10 left-0 rounded-xl shadow-2xl border py-2 min-w-[160px] z-30 flex flex-col"
                                         style={{ backgroundColor: 'var(--page-bg-secondary)', borderColor: 'var(--page-border)' }}>
+                                        <div className="flex items-center justify-center gap-4 px-4 py-3 border-b mb-1" style={{ borderColor: 'var(--page-border)' }}>
+                                            <ThemeToggle />
+                                            <LanguageSwitcher />
+                                        </div>
                                         <Link href={route('projects')} onClick={() => setMenuOpen(false)}
                                             className="flex items-center gap-2 px-4 py-2.5 text-sm font-semibold transition-colors"
                                             style={{ color: 'var(--page-accent)' }}
@@ -157,8 +161,10 @@ export default function News({ newsItems }: Props) {
                             </div>
                         </div>
                         <div className="flex items-center gap-2 sm:gap-3">
-                            <ThemeToggle />
-                            <LanguageSwitcher />
+                            <div className="hidden sm:flex items-center gap-2 sm:gap-3">
+                                <ThemeToggle />
+                                <LanguageSwitcher />
+                            </div>
                             {auth.user ? (
                                 <>
                                     <Link href={route('dashboard')}
