@@ -1,5 +1,5 @@
 import { Link } from '@inertiajs/react';
-import LanguageSwitcher from '@/Components/LanguageSwitcher';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import ThemeToggle from '@/components/theme-toggle';
 
 interface AuthLayoutProps {

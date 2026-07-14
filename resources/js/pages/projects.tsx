@@ -1,6 +1,6 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { type SharedData } from '@/types';
-import LanguageSwitcher from '@/Components/LanguageSwitcher';
+import LanguageSwitcher from '@/components/LanguageSwitcher';
 import ThemeToggle from '@/components/theme-toggle';
 import SiteAdminLink from '@/components/site-admin-link';
 import { useTranslation } from '@/hooks/useTranslation';
@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from 'react';
 
 interface Project {
     id: number;
-    name_en: string;
+    name_en: string;    
     name_ar: string;
     description_en: string;
     description_ar: string;
